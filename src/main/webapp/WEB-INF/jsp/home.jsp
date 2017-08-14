@@ -13,12 +13,12 @@
     <script src="resources/src/jquery.js" type="text/javascript"></script>  
     
     <script src="resources/src/Plugins/Common.js" type="text/javascript"></script>    
-    <script src="resources/src/Plugins/datepicker_lang_US.js" type="text/javascript"></script>     
+    <script src="resources/src/Plugins/datepicker_lang_ZH.js" type="text/javascript"></script>     
     <script src="resources/src/Plugins/jquery.datepicker.js" type="text/javascript"></script>
 
     <script src="resources/src/Plugins/jquery.alert.js" type="text/javascript"></script>    
     <script src="resources/src/Plugins/jquery.ifrmdailog.js" defer="defer" type="text/javascript"></script>
-    <script src="resources/src/Plugins/wdCalendar_lang_US.js" type="text/javascript"></script>    
+    <script src="resources/src/Plugins/wdCalendar_lang_ZH.js" type="text/javascript"></script>    
     <script src="resources/src/Plugins/jquery.calendar.js" type="text/javascript"></script>   
     
     <script type="text/javascript">

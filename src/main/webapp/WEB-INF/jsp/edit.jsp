@@ -14,7 +14,7 @@
     <script src="resources/src/Plugins/Common.js" type="text/javascript"></script>        
     <script src="resources/src/Plugins/jquery.form.js" type="text/javascript"></script>     
     <script src="resources/src/Plugins/jquery.validate.js" type="text/javascript"></script>     
-    <script src="resources/src/Plugins/datepicker_lang_US.js" type="text/javascript"></script>        
+    <script src="resources/src/Plugins/datepicker_lang_ZH.js" type="text/javascript"></script>        
     <script src="resources/src/Plugins/jquery.datepicker.js" type="text/javascript"></script>     
     <script src="resources/src/Plugins/jquery.dropdown.js" type="text/javascript"></script>     
     <script src="resources/src/Plugins/jquery.colorselect.js" type="text/javascript"></script>    
@@ -93,7 +93,7 @@
             $("#Savebtn").click(function() { $("#fmEdit").submit(); });
             $("#Closebtn").click(function() { CloseModelWindow(); });
             $("#Deletebtn").click(function() {
-                 if (confirm("Are you sure to remove this event")) {  
+                 if (confirm("确定删除")) {  
                     var param = [{ "name": "calendarId", value: 8}];                
                     $.post(DATA_FEED_URL + "?method=remove",
                         param,

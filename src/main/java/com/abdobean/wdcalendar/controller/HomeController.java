@@ -33,7 +33,7 @@ public class HomeController {
     @Autowired
     utilities utilities;
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/index")
     public ModelAndView home() {
         List<Jqcalendar> listUsers = new ArrayList<Jqcalendar>();
         ModelAndView model = new ModelAndView("home");

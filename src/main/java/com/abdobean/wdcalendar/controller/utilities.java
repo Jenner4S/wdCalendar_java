@@ -25,7 +25,7 @@ public class utilities {
     public  DateTime[] getWeekRange(String date) {
 
         DateTime[] dateTimes = new DateTime[2];
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("YYYY-MM-DD");
         DateTime dt = formatter.parseDateTime(date);
         DateTime weekStart = dt.withDayOfWeek(DateTimeConstants.MONDAY).withTimeAtStartOfDay();
         DateTime weekEnd = dt.withDayOfWeek(DateTimeConstants.SUNDAY).plusDays(1).withTimeAtStartOfDay();
@@ -41,7 +41,7 @@ public class utilities {
     public  DateTime[] getmonthRange(String date) {
 
         DateTime[] dateTimes = new DateTime[2];
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("YYYY-MM-DD");
         DateTime dt = formatter.parseDateTime(date);
         DateTime start = dt.withDayOfMonth(1).withTimeAtStartOfDay();
         DateTime end = start.plusMonths(1).minusMillis(1);
@@ -56,7 +56,7 @@ public class utilities {
     public  DateTime[] getDayRange(String date) {
 
         DateTime[] dateTimes = new DateTime[2];
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("YYYY-MM-DD");
         DateTime dt = formatter.parseDateTime(date);
         DateTime start = dt.withTimeAtStartOfDay();
         DateTime end = start.plusDays(1);
@@ -69,20 +69,20 @@ public class utilities {
     }
 
     public  DateTime getdateDateTime(String date) {
-        final DateTimeFormatter dtf = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm");
+        final DateTimeFormatter dtf = DateTimeFormat.forPattern("YYYY-MM-DD HH:mm");
         DateTime dt = dtf.parseDateTime(date);
         return dt;
     }
     
     public  String convertDateTimeToString(DateTime date) {
-        final DateTimeFormatter dtf = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm");
+        final DateTimeFormatter dtf = DateTimeFormat.forPattern("YYYY-MM-DD HH:mm");
         String dt = date.toString(dtf);
         return dt;
     }
     
     //m/d/Y H:i
     public  String convertDateTimeToJS(DateTime date) {
-        final DateTimeFormatter dtf = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm");
+        final DateTimeFormatter dtf = DateTimeFormat.forPattern("YYYY-MM-DD HH:mm");
         String dt = date.toString(dtf);
         return dt;
     }

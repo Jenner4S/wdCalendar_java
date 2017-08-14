@@ -20,9 +20,9 @@
           p:password="${jdbc.password}" /-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://db4free.net:3306/mycaaledar"/>
-        <property name="username" value="abdotalaat"/>
-        <property name="password" value="123456789"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/jqcalendar"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
     </bean>	
 
     <bean id="sessionFactory"
