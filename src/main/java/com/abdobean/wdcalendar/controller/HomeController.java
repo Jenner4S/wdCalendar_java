@@ -1,26 +1,22 @@
 package com.abdobean.wdcalendar.controller;
 
-import com.abdobean.wdcalendar.dao.JqCalendarDAO;
-import com.abdobean.wdcalendar.model.Jqcalendar;
-import com.abdobean.wdcalendar.model.Lists;
-import com.abdobean.wdcalendar.model.Shop;
-import com.abdobean.wdcalendar.utils.DateTimeUtilities;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.abdobean.wdcalendar.dao.JqCalendarDAO;
+import com.abdobean.wdcalendar.model.Jqcalendar;
+import com.abdobean.wdcalendar.utils.DateTimeUtilities;
 
 /**
  * Handles requests for the application home page.
@@ -105,6 +101,7 @@ public class HomeController {
         List<Jqcalendar> jqcalendars = jqCalendarDAO.list(dateTimes[0], dateTimes[1]);
         System.out.println(jqcalendars.size());
         String json = utilities.createJqCalendarListJson(jqcalendars, dateTimes[0], dateTimes[1]);
+        System.out.println(json);
         return json;
     }
 

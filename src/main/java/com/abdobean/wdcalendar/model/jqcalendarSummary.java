@@ -4,8 +4,6 @@
  */
 package com.abdobean.wdcalendar.model;
 
-import org.joda.time.DateTime;
-
 /**
  *
  * @author abdo.talaat

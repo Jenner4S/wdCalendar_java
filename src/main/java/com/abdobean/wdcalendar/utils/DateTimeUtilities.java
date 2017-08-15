@@ -4,32 +4,28 @@
  */
 package com.abdobean.wdcalendar.utils;
 
-import com.abdobean.wdcalendar.model.Jqcalendar;
-import com.abdobean.wdcalendar.model.jqcalendarSummary;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import org.joda.time.Chronology;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
-import org.joda.time.DateTimeZone;
-import org.joda.time.chrono.GJChronology;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import com.abdobean.wdcalendar.model.Jqcalendar;
+import com.abdobean.wdcalendar.model.jqcalendarSummary;
 
 /**
  *
  * @author abdo.talaat
  */
 public class DateTimeUtilities {
-
+	private static DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
     public  DateTime[] getWeekRange(String date) {
 
         DateTime[] dateTimes = new DateTime[2];
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("YYYY-MM-DD");
+        
         DateTime dt = formatter.parseDateTime(date);
         DateTime weekStart = dt.withDayOfWeek(DateTimeConstants.MONDAY).withTimeAtStartOfDay();
         DateTime weekEnd = dt.withDayOfWeek(DateTimeConstants.SUNDAY).plusDays(1).withTimeAtStartOfDay();
@@ -43,9 +39,7 @@ public class DateTimeUtilities {
     }
 
     public  DateTime[] getmonthRange(String date) {
-
         DateTime[] dateTimes = new DateTime[2];
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("YYYY-MM-DD");
         DateTime dt = formatter.parseDateTime(date);
         DateTime start = dt.withDayOfMonth(1).withTimeAtStartOfDay();
         DateTime end = start.plusMonths(1).minusMillis(1);
@@ -58,15 +52,8 @@ public class DateTimeUtilities {
     }
 
     public  DateTime[] getDayRange(String date) {
-
-    		//DateTimeZone.setDefault(DateTimeZone.forID("Asia/Shanghai"));
-    		DateTimeZone zone = DateTimeZone.forID("Asia/Shanghai");
-    		Chronology gregorianJuian = GJChronology.getInstance(zone);
-    		System.out.println("now: " + DateTime.now());
         DateTime[] dateTimes = new DateTime[2];
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("YYYY-MM-DD");
-        System.out.println(formatter.getZone());
-        DateTime dt = formatter.withChronology(gregorianJuian).parseDateTime(date);
+        DateTime dt = formatter.parseDateTime(date);
         DateTime start = dt.withTimeAtStartOfDay();
         DateTime end = start.plusDays(1);
         dateTimes[0] = start;
@@ -78,20 +65,20 @@ public class DateTimeUtilities {
     }
 
     public  DateTime getdateDateTime(String date) {
-        final DateTimeFormatter dtf = DateTimeFormat.forPattern("YYYY-MM-DD HH:mm");
+        final DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
         DateTime dt = dtf.parseDateTime(date);
         return dt;
     }
     
     public  String convertDateTimeToString(DateTime date) {
-        final DateTimeFormatter dtf = DateTimeFormat.forPattern("YYYY-MM-DD HH:mm");
+        final DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
         String dt = date.toString(dtf);
         return dt;
     }
     
     //m/d/Y H:i
     public  String convertDateTimeToJS(DateTime date) {
-        final DateTimeFormatter dtf = DateTimeFormat.forPattern("YYYY-MM-DD HH:mm");
+        final DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
         String dt = date.toString(dtf);
         return dt;
     }

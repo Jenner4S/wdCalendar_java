@@ -1,20 +1,16 @@
 package com.abdobean.wdcalendar.dao;
 
-import com.abdobean.wdcalendar.model.Jqcalendar;
-import java.io.Serializable;
 import java.util.List;
 
-
-
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.abdobean.wdcalendar.model.Jqcalendar;
 
 @Repository
 public class JqCalendarDAOImpl implements JqCalendarDAO {
