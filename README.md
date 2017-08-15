@@ -18,8 +18,21 @@ Write this command
 
 Open localhost:8080 in your browser.
 
+4.ShowCase Screenshot
+###Project Structure
+![image](https://github.com/Jenner4S/wdCalendar_java/blob/master/docs/screenshot/wdCalendarProjectPic.png)
+###中文周视图
+![image](https://github.com/Jenner4S/wdCalendar_java/blob/master/docs/screenshot/wdCalendarProjectIndex-ZH%402x.png)
+###中文月视图
+![image](https://github.com/Jenner4S/wdCalendar_java/blob/master/docs/screenshot/wdCalendarProjectIndex-ZH-month%402x.png)
+###英文周视图
+![image](https://github.com/Jenner4S/wdCalendar_java/blob/master/docs/screenshot/wdCalendarProjectIndex-en-week%402x.png)
+###英文周视图
+![image](https://github.com/Jenner4S/wdCalendar_java/blob/master/docs/screenshot/wdCalendarProjectIndex-en-month%402x.png)
+
 
 what is next?
         1-Add event and repeat it for specific days
+  
 
 
