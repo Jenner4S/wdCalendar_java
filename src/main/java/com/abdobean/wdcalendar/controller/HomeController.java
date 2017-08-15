@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.joda.time.DateTime;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,30 +62,30 @@ public class HomeController {
 
     @RequestMapping(value = "/calendar/rest", method = RequestMethod.POST)
     public @ResponseBody
-    String getShopInJSON(@RequestParam("method") String method, @RequestParam(value = "showdate", required = false) String showdate, @RequestParam(value = "viewtype", required = false) String viewtype) {
-        String res = "";
+    JSONObject getShopInJSON(@RequestParam("method") String method, @RequestParam(value = "showdate", required = false) String showdate, @RequestParam(value = "viewtype", required = false) String viewtype) {
+        JSONObject ret = new JSONObject();
 
         System.out.println(method);
         if (method.equals("list")) {
             System.out.println(showdate);
             System.out.println(viewtype);
-            res = list(showdate, viewtype);
+            ret = list(showdate, viewtype);
 
         } else if (method.equals("add")) {
-            res = addCalendar();
+        		ret = addCalendar();
         } else if (method.equals("adddetails")) {
-            res = addDetails();
+        		ret = addDetails();
         } else if (method.equals("update")) {
-            res = update();
+        		ret = update();
         } else if (method.equals("remove")) {
-            res = remove();
+        		ret = remove();
         }
 
-        return res;
+        return ret;
 
     }
 
-    public String list(String date, String viewType) {
+    public JSONObject list(String date, String viewType) {
         DateTime[] dateTimes = null;
         String res = "";
 
@@ -100,12 +101,12 @@ public class HomeController {
 
         List<Jqcalendar> jqcalendars = jqCalendarDAO.list(dateTimes[0], dateTimes[1]);
         System.out.println(jqcalendars.size());
-        String json = utilities.createJqCalendarListJson(jqcalendars, dateTimes[0], dateTimes[1]);
-        System.out.println(json);
-        return json;
+        return utilities.createJqCalendarListJson(jqcalendars, dateTimes[0], dateTimes[1]);
     }
 
-    public String addCalendar() {
+    public JSONObject addCalendar() {
+    		JSONObject ret = new JSONObject();
+    		ret.put("IsSuccess", true);
         Jqcalendar jqcalendar = new Jqcalendar();
         // System.out.println(context.getParameter("CalendarStartTime"));
         DateTime CalendarStartTime = utilities.getdateDateTime(context.getParameter("CalendarStartTime"));
@@ -119,14 +120,19 @@ public class HomeController {
 
         //  System.out.print(json.get("CalendarStartTime"));
         int id = jqCalendarDAO.add(jqcalendar);
+        
         if (id > 0) {
-            return "{\"IsSuccess\":true,\"Msg\":\"add success\",\"Data\":" + id + "}";
+        		ret.put("Msg", "add success");
+        		ret.put("Data", id);
         } else {
-            return "{\"IsSuccess\":true,\"Msg\":\"add faild\"";
+        		ret.put("Msg", "add faild");
         }
+        return ret;
     }
 
-    public String addDetails() {
+    public JSONObject addDetails() {
+    		JSONObject ret = new JSONObject();
+    		ret.put("IsSuccess", true);
         String stpartdate = context.getParameter("stpartdate");
         String stparttime = context.getParameter("stparttime");
         String etpartdate = context.getParameter("etpartdate");
@@ -143,7 +149,6 @@ public class HomeController {
         String colorvalue = context.getParameter("colorvalue");
         String timezone = context.getParameter("timezone");
 
-
         Jqcalendar jqcalendar = new Jqcalendar();
         jqcalendar.setColor(colorvalue);
         jqcalendar.setDescription(Description);
@@ -158,9 +163,6 @@ public class HomeController {
         jqcalendar.setLocation(Location);
         jqcalendar.setSubject(CalendarTitle);
 
-
-
-
         int ids = 0;
 
         String id = context.getParameter("id");
@@ -173,15 +175,19 @@ public class HomeController {
 
 
         if (ids > 0) {
-            return "{\"IsSuccess\":true,\"Msg\":\"add success\",\"Data\":" + id + "}";
+        		ret.put("Msg", "addDetails success");
+        		ret.put("Data", id);
         } else {
-            return "{\"IsSuccess\":true,\"Msg\":\"add faild\"";
+        		ret.put("Msg", "addDetails faild");
         }
+        
+        return ret;
 
     }
 
-    public String update() {
-
+    public JSONObject update() {
+    		JSONObject ret = new JSONObject();
+		ret.put("IsSuccess", true);
         String calendarId = context.getParameter("calendarId");
         String CalendarStartTime = context.getParameter("CalendarStartTime");
         String CalendarEndTime = context.getParameter("CalendarEndTime");
@@ -195,17 +201,21 @@ public class HomeController {
         int id = jqCalendarDAO.update(jqcalendar);
 
         if (id > 0) {
-            return "{\"IsSuccess\":true,\"Msg\":\"add success\",\"Data\":" + id + "}";
-        } else {
-            return "{\"IsSuccess\":true,\"Msg\":\"add faild\"";
-        }
-
+	    		ret.put("Msg", "update success");
+	    		ret.put("Data", id);
+	    } else {
+	    		ret.put("Msg", "update faild");
+	    }
+        return ret;
 
     }
 
-    public String remove() {
+    public JSONObject remove() {
+    		JSONObject ret = new JSONObject();
+		ret.put("IsSuccess", true);
         String calendarId = context.getParameter("calendarId");
         jqCalendarDAO.remove(Integer.parseInt(calendarId));
-        return "{\"IsSuccess\":true,\"Msg\":\"add success\"}";
+        ret.put("Msg", "remove success");
+        return ret;
     }
 }

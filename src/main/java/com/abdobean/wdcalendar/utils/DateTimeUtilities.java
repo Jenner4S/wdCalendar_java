@@ -100,7 +100,7 @@ public class DateTimeUtilities {
     }
     
     
-    public String createJqCalendarListJson(List<Jqcalendar> jqcalendars,DateTime start,DateTime end)
+    public JSONObject createJqCalendarListJson(List<Jqcalendar> jqcalendars,DateTime start,DateTime end)
     {
         JSONArray jSONArray = new JSONArray();
         for (Jqcalendar jqcalendar : jqcalendars) {
@@ -125,6 +125,6 @@ public class DateTimeUtilities {
         jSONObject.put("start", convertDateTimeToString(start));
         jSONObject.put("end", convertDateTimeToString(end));
         jSONObject.put("error", null);
-        return jSONObject.toJSONString();
+        return jSONObject;
     }
 }

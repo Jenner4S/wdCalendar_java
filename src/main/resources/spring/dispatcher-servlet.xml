@@ -12,12 +12,18 @@
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven>
-		<mvc:message-converters register-defaults="true">
+		<mvc:message-converters register-defaults="true">  
 			<!-- 解决@ResponseBody中文乱码 -->
-			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
-				<property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
-			</bean>
-		</mvc:message-converters>
+	        <!--json处理-->    
+	        <bean  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">    
+	            <property name="supportedMediaTypes">    
+	                <list>    
+	                    <value>application/json;charset=UTF-8</value>    
+	                    <value>text/html;charset=UTF-8</value>    
+	                </list>    
+	            </property>    
+	        </bean>    
+	    </mvc:message-converters> 
 	</mvc:annotation-driven>
 	<mvc:default-servlet-handler></mvc:default-servlet-handler>
 	<tx:annotation-driven />
@@ -35,26 +41,6 @@
 	<!-- Most controllers will use the ControllerClassNameHandlerMapping above, 
 		but for the index controller we are using ParameterizableViewController, 
 		so we must define an explicit mapping for it. -->
-		
-	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>application/json</value>
-				<value>text/html;charset=UTF-8</value>
-			</list>
-		</property>
-	</bean>
-	<!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<ref bean="mappingJacksonHttpMessageConverter" />	<!-- JSON转换器 -->
-			</list>
-		</property>
-	</bean>
-
-
-
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
