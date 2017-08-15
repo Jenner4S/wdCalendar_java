@@ -140,7 +140,8 @@ public class DateTimeUtilities {
             array.add(jqcalendar.getColor());
             array.add(1);
             array.add(jqcalendar.getLocation());
-            array.add("''");
+            
+            array.add(jqcalendar.getUser() == null ? "''":jqcalendar.getUser().getUserName());//参与人
             jSONArray.add(array);
         }
         JSONObject jSONObject = new JSONObject();

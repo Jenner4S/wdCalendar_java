@@ -4,12 +4,24 @@ package com.abdobean.wdcalendar.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.IndexColumn;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +47,11 @@ public class Jqcalendar  implements java.io.Serializable {
      private short isAllDayEvent;
      private String color;
      private String recurringRule;
+     
+     private User user;
+//     private List<User> users;
+     
+     
 
     public Jqcalendar() {
     }
@@ -54,8 +71,7 @@ public class Jqcalendar  implements java.io.Serializable {
        this.recurringRule = recurringRule;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-    
+    @Id @GeneratedValue(strategy=IDENTITY)
     @Column(name="Id", unique=true, nullable=false)
     public Integer getId() {
         return this.id;
@@ -140,8 +156,21 @@ public class Jqcalendar  implements java.io.Serializable {
     public void setRecurringRule(String recurringRule) {
         this.recurringRule = recurringRule;
     }
+    
+    
 
-    @Override
+    @ManyToOne
+    public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+	@Override
     public String toString() {
         return "["+id+","+subject+","+utilities.convertDateTimeToString(startTime)+","+utilities.convertDateTimeToString(endTime)+","+isAllDayEvent+",0,0,"+color+",1,"+location+",'']";
     }

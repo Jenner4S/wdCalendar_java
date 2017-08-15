@@ -12,7 +12,7 @@
     <link href="resources/css/dp.css" rel="stylesheet" />    
     <link href="resources/css/dropdown.css" rel="stylesheet" />    
     <link href="resources/css/colorselect.css" rel="stylesheet" />   
-     
+       
     <script src="resources/src/jquery.js" type="text/javascript"></script>    
     <script src="resources/src/Plugins/Common.js" type="text/javascript"></script>        
     <script src="resources/src/Plugins/jquery.form.js" type="text/javascript"></script>     
@@ -29,8 +29,7 @@
           
     <script src="resources/src/Plugins/jquery.datepicker.js" type="text/javascript"></script>     
     <script src="resources/src/Plugins/jquery.dropdown.js" type="text/javascript"></script>     
-    <script src="resources/src/Plugins/jquery.colorselect.js" type="text/javascript"></script>    
-     
+    <script src="resources/src/Plugins/jquery.colorselect.js" type="text/javascript"></script>  
     <script type="text/javascript">
         if (!DateAdd || typeof (DateDiff) != "function") {
             var DateAdd = function(interval, number, idate) {
@@ -64,6 +63,7 @@
              return ret;
         }
         $(document).ready(function() {
+        		
             //debugger;
             var DATA_FEED_URL = "calendar/rest";
             var arrT = [];
@@ -226,6 +226,25 @@
               </label>                    
             </div>                
           </label>                 
+          <label>                    
+          	<span><spring:message code="edit.participant.text"/>:</span>
+          	<select id="participant" name="participant" style="width:95%;">
+          		<option>Select...</option>
+          	<c:if test="${not empty users }">
+          	<c:forEach items="${users }" var="user">
+          		<option value="${user.id }" 
+          		<c:if test="${not empty uid}">
+	          		<c:if test="${uid == user.id}">
+	          			selected
+	          		</c:if>
+          		</c:if>
+          		>${user.userName }</option>
+          	</c:forEach>	
+          	</c:if>
+          	
+          	
+          	</select>                    
+          </label>
           <label>                    
           	<span><spring:message code="edit.Location.text"/>:</span>                    
           	<input MaxLength="200" id="Location" name="Location" style="width:95%;" type="text" value='<c:if test="${not empty event}"><c:out value="${event.location}"/></c:if>' />                 

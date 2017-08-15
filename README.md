@@ -18,7 +18,7 @@ Write this command
 
 Open localhost:8080 in your browser.
 
-4.ShowCase Screenshot
+4.  ShowCase Screenshot
 ###Project Structure
 ![image](https://github.com/Jenner4S/wdCalendar_java/blob/master/docs/screenshot/wdCalendarProjectPic.png)
 ###中文日视图

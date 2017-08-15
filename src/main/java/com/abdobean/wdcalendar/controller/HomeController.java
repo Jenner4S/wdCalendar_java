@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.joda.time.DateTime;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.abdobean.wdcalendar.dao.JqCalendarDAO;
+import com.abdobean.wdcalendar.dao.UserDao;
 import com.abdobean.wdcalendar.model.Jqcalendar;
+import com.abdobean.wdcalendar.model.User;
 import com.abdobean.wdcalendar.utils.DateTimeUtilities;
 
 /**
@@ -27,6 +28,8 @@ import com.abdobean.wdcalendar.utils.DateTimeUtilities;
 @Controller
 public class HomeController {
 
+	@Autowired  
+	UserDao userDao;
     @Autowired
     JqCalendarDAO jqCalendarDAO;
     @Autowired
@@ -54,6 +57,8 @@ public class HomeController {
     @RequestMapping(value = "/edit")
     public ModelAndView edit() {
         ModelAndView model = new ModelAndView("edit");
+        
+        List<User> users =  userDao.findAll();
         String id = context.getParameter("id");
         if (id != null && !id.equals("0")) {
             Jqcalendar jqcalendar = jqCalendarDAO.getcalendar(Integer.parseInt(id));
@@ -66,7 +71,9 @@ public class HomeController {
             model.addObject("stparttime", stDT[1]);
             model.addObject("etpartdate", edDT[0]);
             model.addObject("etparttime", edDT[1]);
+            model.addObject("uid", jqcalendar.getUser()==null?"":jqcalendar.getUser().getId());
         }
+        model.addObject("users", users);
 
         return model;
     }
@@ -170,6 +177,7 @@ public class HomeController {
         String Description = context.getParameter("Description");
         String Location = context.getParameter("Location");
         String colorvalue = context.getParameter("colorvalue");
+        String userIds = context.getParameter("participant");
         String timezone = context.getParameter("timezone");
 
         Jqcalendar jqcalendar = new Jqcalendar();
@@ -185,6 +193,10 @@ public class HomeController {
 
         jqcalendar.setLocation(Location);
         jqcalendar.setSubject(CalendarTitle);
+        
+        if (userIds != null) {
+        		jqcalendar.setUser(userDao.findById(Long.parseLong(userIds)));
+		}
 
         int ids = 0;
 
