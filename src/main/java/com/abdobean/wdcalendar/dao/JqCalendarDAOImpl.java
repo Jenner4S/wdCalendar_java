@@ -12,49 +12,48 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.abdobean.wdcalendar.model.Jqcalendar;
 
+@SuppressWarnings("unchecked")
 @Repository
 public class JqCalendarDAOImpl implements JqCalendarDAO {
 	private SessionFactory sessionFactory;
 
-        @Autowired
+	@Autowired
 	public JqCalendarDAOImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
 	@Transactional
-	public List<Jqcalendar> list(DateTime start,DateTime end) {
-		@SuppressWarnings("unchecked")
+	public List<Jqcalendar> list(DateTime start, DateTime end) {
+		
 		List<Jqcalendar> listUser = (List<Jqcalendar>) sessionFactory.getCurrentSession()
-				.createCriteria(Jqcalendar.class)
-				.add(Restrictions.between("startTime", start, end)).list();
+				.createCriteria(Jqcalendar.class).add(Restrictions.between("startTime", start, end)).list();
 
 		return listUser;
 	}
 
-        @Transactional
-    public int add(Jqcalendar jqcalendar) {
-            boolean b = true;
-            sessionFactory.getCurrentSession().save(jqcalendar);
-        return jqcalendar.getId();
-    }
+	@Transactional
+	public int add(Jqcalendar jqcalendar) {
+		boolean b = true;
+		sessionFactory.getCurrentSession().save(jqcalendar);
+		return jqcalendar.getId();
+	}
 
-        
-        @Transactional
-    public Jqcalendar getcalendar(int id) {
-           Jqcalendar jqcalendar = (Jqcalendar) sessionFactory.getCurrentSession().get(Jqcalendar.class, id);
-           return jqcalendar;
-    }
+	@Transactional
+	public Jqcalendar getcalendar(int id) {
+		Jqcalendar jqcalendar = (Jqcalendar) sessionFactory.getCurrentSession().get(Jqcalendar.class, id);
+		return jqcalendar;
+	}
 
-        @Transactional
-    public int update(Jqcalendar jqcalendar) {
-         sessionFactory.getCurrentSession().saveOrUpdate(jqcalendar);
-        return jqcalendar.getId();
-    }
+	@Transactional
+	public int update(Jqcalendar jqcalendar) {
+		sessionFactory.getCurrentSession().saveOrUpdate(jqcalendar);
+		return jqcalendar.getId();
+	}
 
-        @Transactional
-    public void remove(int id) {
-        Query query = sessionFactory.getCurrentSession().createQuery("delete from Jqcalendar where id="+id+"");
-        query.executeUpdate();
-    }
+	@Transactional
+	public void remove(int id) {
+		Query query = sessionFactory.getCurrentSession().createQuery("delete from Jqcalendar where id=" + id + "");
+		query.executeUpdate();
+	}
 
 }

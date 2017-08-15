@@ -1,4 +1,5 @@
 try { document.execCommand("BackgroundImageCache", false, true); } catch (e) { }
+
 var popUpWin;
 function PopUpCenterWindow(URLStr, width, height, newWin, scrollbars) {
     var popUpWin = 0;

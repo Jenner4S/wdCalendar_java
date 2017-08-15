@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.joda.time.DateTime;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,7 @@ import com.abdobean.wdcalendar.utils.DateTimeUtilities;
 /**
  * Handles requests for the application home page.
  */
+@SuppressWarnings("unchecked")
 @Controller
 public class HomeController {
 
@@ -32,6 +34,10 @@ public class HomeController {
     @Autowired
     DateTimeUtilities utilities;
 
+    /**
+     * 首页 home page
+     * @return
+     */
     @RequestMapping(value = "/index")
     public ModelAndView home() {
         List<Jqcalendar> listUsers = new ArrayList<Jqcalendar>();
@@ -40,11 +46,16 @@ public class HomeController {
         return model;
     }
 
+    /**
+     * edit or new event 
+     * 编辑日程和新增日程界面
+     * @return
+     */
     @RequestMapping(value = "/edit")
     public ModelAndView edit() {
         ModelAndView model = new ModelAndView("edit");
         String id = context.getParameter("id");
-        if (id != null) {
+        if (id != null && !id.equals("0")) {
             Jqcalendar jqcalendar = jqCalendarDAO.getcalendar(Integer.parseInt(id));
             String startDateTime = utilities.convertDateTimeToJS(jqcalendar.getStartTime());
             String endDateTime = utilities.convertDateTimeToJS(jqcalendar.getEndTime());
@@ -61,10 +72,12 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/calendar/rest", method = RequestMethod.POST)
-    public @ResponseBody
-    JSONObject getShopInJSON(@RequestParam("method") String method, @RequestParam(value = "showdate", required = false) String showdate, @RequestParam(value = "viewtype", required = false) String viewtype) {
+    @ResponseBody
+    public  JSONObject getShopInJSON(@RequestParam("method") String method, 
+    		@RequestParam(value = "showdate", required = false) String showdate, 
+    		@RequestParam(value = "viewtype", required = false) String viewtype) {
+    	
         JSONObject ret = new JSONObject();
-
         System.out.println(method);
         if (method.equals("list")) {
             System.out.println(showdate);
@@ -80,30 +93,35 @@ public class HomeController {
         } else if (method.equals("remove")) {
         		ret = remove();
         }
-
         return ret;
-
     }
-
+    /**
+     * query list 
+     * 查询列表数据
+     * @param date
+     * @param viewType
+     * @return
+     */
     public JSONObject list(String date, String viewType) {
         DateTime[] dateTimes = null;
-        String res = "";
-
         if (viewType.equals("week")) {
             dateTimes = utilities.getWeekRange(date);
-
         } else if (viewType.equals("day")) {
             dateTimes = utilities.getDayRange(date);
         } else {
             dateTimes = utilities.getmonthRange(date);
         }
 
-
         List<Jqcalendar> jqcalendars = jqCalendarDAO.list(dateTimes[0], dateTimes[1]);
         System.out.println(jqcalendars.size());
         return utilities.createJqCalendarListJson(jqcalendars, dateTimes[0], dateTimes[1]);
     }
 
+    /**
+     * quick add calendar event
+     * 快速添加日程
+     * @return
+     */
     public JSONObject addCalendar() {
     		JSONObject ret = new JSONObject();
     		ret.put("IsSuccess", true);
@@ -130,7 +148,12 @@ public class HomeController {
         return ret;
     }
 
-    public JSONObject addDetails() {
+    /**
+     *  add calendar event detail
+     *  点击 NEW CALENDAR 添加日程详细
+     * @return
+     */
+	public JSONObject addDetails() {
     		JSONObject ret = new JSONObject();
     		ret.put("IsSuccess", true);
         String stpartdate = context.getParameter("stpartdate");
@@ -185,6 +208,11 @@ public class HomeController {
 
     }
 
+	/**
+	 * update calendar 
+	 * 更新日程
+	 * @return
+	 */
     public JSONObject update() {
     		JSONObject ret = new JSONObject();
 		ret.put("IsSuccess", true);
@@ -209,7 +237,12 @@ public class HomeController {
         return ret;
 
     }
-
+    
+    /**
+     * delete calendar
+     * 删除日程
+     * @return
+     */
     public JSONObject remove() {
     		JSONObject ret = new JSONObject();
 		ret.put("IsSuccess", true);

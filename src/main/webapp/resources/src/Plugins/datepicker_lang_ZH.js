@@ -27,7 +27,7 @@ var i18n = $.extend({}, i18n || {}, {
             "dec": "十二",
             "postfix":"月"
         },
-        ok: " 確定 ",
+        ok: " 确定 ",
         cancel: " 取消 ",
         today: "今天",
         prev_month_title:"上一月",

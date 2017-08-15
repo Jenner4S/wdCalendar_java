@@ -12,6 +12,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 import com.abdobean.wdcalendar.model.Jqcalendar;
 import com.abdobean.wdcalendar.model.jqcalendarSummary;
@@ -21,8 +22,11 @@ import com.abdobean.wdcalendar.model.jqcalendarSummary;
  * @author abdo.talaat
  */
 public class DateTimeUtilities {
-	private static DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
     public  DateTime[] getWeekRange(String date) {
+    		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+    		if(LocaleContextHolder.getLocale().getLanguage().equals("en")) {
+    			formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+    		}
 
         DateTime[] dateTimes = new DateTime[2];
         
@@ -39,6 +43,10 @@ public class DateTimeUtilities {
     }
 
     public  DateTime[] getmonthRange(String date) {
+    		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+    		if(LocaleContextHolder.getLocale().getLanguage().equals("en")) {
+			formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+		}
         DateTime[] dateTimes = new DateTime[2];
         DateTime dt = formatter.parseDateTime(date);
         DateTime start = dt.withDayOfMonth(1).withTimeAtStartOfDay();
@@ -52,6 +60,10 @@ public class DateTimeUtilities {
     }
 
     public  DateTime[] getDayRange(String date) {
+    		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+    		if(LocaleContextHolder.getLocale().getLanguage().equals("en")) {
+			formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+		}
         DateTime[] dateTimes = new DateTime[2];
         DateTime dt = formatter.parseDateTime(date);
         DateTime start = dt.withTimeAtStartOfDay();
@@ -65,20 +77,32 @@ public class DateTimeUtilities {
     }
 
     public  DateTime getdateDateTime(String date) {
+    		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
         final DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
+        if(LocaleContextHolder.getLocale().getLanguage().equals("en")) {
+			formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm");
+		}
         DateTime dt = dtf.parseDateTime(date);
         return dt;
     }
     
     public  String convertDateTimeToString(DateTime date) {
+    		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
         final DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
+        if(LocaleContextHolder.getLocale().getLanguage().equals("en")) {
+			formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm");
+		}
         String dt = date.toString(dtf);
         return dt;
     }
     
     //m/d/Y H:i
     public  String convertDateTimeToJS(DateTime date) {
+    		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
         final DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
+        if(LocaleContextHolder.getLocale().getLanguage().equals("en")) {
+			formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm");
+		}
         String dt = date.toString(dtf);
         return dt;
     }

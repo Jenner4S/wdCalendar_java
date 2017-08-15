@@ -29,6 +29,22 @@
 	<tx:annotation-driven />
 	
 	
+	<!-- 按会话属性解析区域信息 不存在，它会根据accept-language HTTP头部确定默认区域。-->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" >
+    		<property name="defaultLocale" value="zh"/> 
+    </bean>
+    <!-- 国际化资源文件 -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:i18n/messages" />
+    </bean>
+ 
+    <mvc:interceptors>
+        <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang" />
+        </bean>
+    </mvc:interceptors>
+	
+	
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>

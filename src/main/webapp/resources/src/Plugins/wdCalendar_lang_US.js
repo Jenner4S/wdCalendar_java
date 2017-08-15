@@ -56,5 +56,19 @@ var i18n = $.extend({}, i18n || {}, {
         "day_plural": "days",
         "others": "Others",
         "item": ""
+        
+        ,"loading_data_str":"Loading data..."
+        ,"loading_data_processed_str":"The request is being processed ..."
+        ,"edit_win_caption":"Manage  The Calendar"
+        ,"new_win_caption":"Create New Calendar"
+        ,"loadingpannel":"Success!"
+        ,"Ok":"Ok"
+        ,"Cancel":"Cancel"
+        ,"ConfirmStr":"Are You Sure to Delete this Event?"
+        ,"Confirm":"Confirm"
+        ,"key":"v"
+        ,"key":"v"
+        ,"key":"v"
+        
     }
 });

@@ -1,10 +1,13 @@
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="mvc" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
    
   <head>    
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">    
-    <title>Calendar Details</title>    
+    <title><spring:message code="edit.title"/></title>    
     <link href="resources/css/main.css" rel="stylesheet" type="text/css" />       
     <link href="resources/css/dp.css" rel="stylesheet" />    
     <link href="resources/css/dropdown.css" rel="stylesheet" />    
@@ -14,7 +17,16 @@
     <script src="resources/src/Plugins/Common.js" type="text/javascript"></script>        
     <script src="resources/src/Plugins/jquery.form.js" type="text/javascript"></script>     
     <script src="resources/src/Plugins/jquery.validate.js" type="text/javascript"></script>     
-    <script src="resources/src/Plugins/datepicker_lang_ZH.js" type="text/javascript"></script>        
+    <script src="resources/src/Plugins/datepicker_lang_ZH.js" type="text/javascript"></script> 
+	<c:choose>  
+	   <c:when test="${pageContext.response.locale == 'zh_CN'}">
+	   <script src="resources/src/Plugins/wdCalendar_lang_ZH.js" type="text/javascript"></script>   
+	   </c:when>  
+	   <c:otherwise>
+	   <script src="resources/src/Plugins/wdCalendar_lang_US.js" type="text/javascript"></script>     
+	   </c:otherwise>  
+	</c:choose> 
+          
     <script src="resources/src/Plugins/jquery.datepicker.js" type="text/javascript"></script>     
     <script src="resources/src/Plugins/jquery.dropdown.js" type="text/javascript"></script>     
     <script src="resources/src/Plugins/jquery.colorselect.js" type="text/javascript"></script>    
@@ -93,20 +105,17 @@
             $("#Savebtn").click(function() { $("#fmEdit").submit(); });
             $("#Closebtn").click(function() { CloseModelWindow(); });
             $("#Deletebtn").click(function() {
-                 if (confirm("确定删除")) {  
+                 if (confirm(i18n.xgcalendar.ConfirmStr)) {  
                     var param = [{ "name": "calendarId", value: 8}];                
-                    $.post(DATA_FEED_URL + "?method=remove",
-                        param,
-                        function(data){
-                              if (data.IsSuccess) {
-                                    alert(data.Msg); 
-                                    CloseModelWindow(null,true);                            
-                                }
-                                else {
-                                    alert("Error occurs.\r\n" + data.Msg);
-                                }
+                    $.post(DATA_FEED_URL + "?method=remove",param,function(data){
+                        if (data.IsSuccess) {
+                            alert(data.Msg); 
+                            CloseModelWindow(null,true);                            
                         }
-                    ,"json");
+                        else {
+                            alert("Error occurs.\r\n" + data.Msg);
+                        }
+                     },"json");
                 }
             });
             
@@ -176,20 +185,18 @@
     <div>      
       <div class="toolBotton">           
         <a id="Savebtn" class="imgbtn" href="javascript:void(0);">                
-          <span class="Save"  title="Save the calendar">Save(<u>S</u>)
+          <span class="Save"  title="<spring:message code="edit.Save.title"/>"><spring:message code="edit.Save.text"/>(<u>S</u>)
           </span>          
         </a>  
           
-   <c:if test="${not empty event}">
-     <a id="Deletebtn" class="imgbtn" href="javascript:void(0);">                    
-          <span class="Delete" title="Cancel the calendar">Delete(<u>D</u>)
-          </span>                
-        </a>  
-</c:if>
-
+	   <c:if test="${not empty event}">
+	     <a id="Deletebtn" class="imgbtn" href="javascript:void(0);">                    
+	          <span class="Delete" title="<spring:message code="edit.Delete.title"/>"><spring:message code="edit.Delete.text"/>(<u>D</u>)
+	          </span>                
+	        </a>  
+		</c:if>
         <a id="Closebtn" class="imgbtn" href="javascript:void(0);">                
-          <span class="Close" title="Close the window" >Close
-          </span></a>            
+          <span class="Close" title="<spring:message code="edit.Close.title"/>" ><spring:message code="edit.Close.text"/></span>         
         </a>        
       </div>                  
       <div style="clear: both">         
@@ -198,41 +205,38 @@
 <!--        <form action="php/datafeed.php?method=adddetails><?php echo isset($event)?"&id=".$event->Id:""; ?>" class="fform" id="fmEdit" method="post">                 -->
         <form action='calendar/rest?method=adddetails<c:if test="${not empty event}"><c:out value="&id=${event.id}"/></c:if>' class="fform" id="fmEdit" method="post">                 
           <label>                    
-            <span>                        *Subject:              
-            </span>                    
+            <span>*<spring:message code="edit.Subject.text"/>:</span>                    
             <div id="calendarcolor">
             </div>
             <input MaxLength="200" class="required safe" id="Subject" name="Subject" style="width:85%;" type="text" value='<c:if test="${not empty event}"><c:out value="${event.subject}"/></c:if>' />                     
             <input id="colorvalue" name="colorvalue" type="hidden" value='<c:if test="${not empty event}"><c:out value="${event.color}"/></c:if>' />                
           </label>                 
           <label>                    
-            <span>*Time:
+            <span>*<spring:message code="edit.Time.text"/>:
             </span>                    
             <div>  
           <input MaxLength="10" class="required date" id="stpartdate" name="stpartdate" style="padding-left:2px;width:90px;" type="text" value='<c:if test="${not empty stpartdate}"><c:out value="${stpartdate}"/></c:if>' />                       
-              <input MaxLength="5" class="required time" id="stparttime" name="stparttime" style="width:40px;" type="text" value='<c:if test="${not empty stparttime}"><c:out value="${stparttime}"/></c:if>' />To                       
+              <input MaxLength="5" class="required time" id="stparttime" name="stparttime" style="width:40px;" type="text" value='<c:if test="${not empty stparttime}"><c:out value="${stparttime}"/></c:if>' /> 至                       
               <input MaxLength="10" class="required date" id="etpartdate" name="etpartdate" style="padding-left:2px;width:90px;" type="text" value='<c:if test="${not empty etpartdate}"><c:out value="${etpartdate}"/></c:if>' />                       
               <input MaxLength="50" class="required time" id="etparttime" name="etparttime" style="width:40px;" type="text" value='<c:if test="${not empty etparttime}"><c:out value="${etparttime}"/></c:if>' />                                            
               <label class="checkp"> 
                 <input id="IsAllDayEvent" name="IsAllDayEvent" type="checkbox" value="1" 
                        <c:if test="${not empty event && event.isAllDayEvent != 0}"><c:out value="checked"/></c:if>
-                       />          All Day Event                      
+                /><spring:message code="edit.IsAllDayEvent.text"/>                   
               </label>                    
             </div>                
           </label>                 
           <label>                    
-            <span>                        Location:
-            </span>                    
-            <input MaxLength="200" id="Location" name="Location" style="width:95%;" type="text" value='<c:if test="${not empty event}"><c:out value="${event.location}"/></c:if>' />                 
+          	<span><spring:message code="edit.Location.text"/>:</span>                    
+          	<input MaxLength="200" id="Location" name="Location" style="width:95%;" type="text" value='<c:if test="${not empty event}"><c:out value="${event.location}"/></c:if>' />                 
           </label>                 
           <label>                    
-            <span>                        Remark:
-            </span>                    
-<textarea cols="20" id="Description" name="Description" rows="2" style="width:95%; height:70px">
-<c:if test="${not empty event}"><c:out value="${event.description}"/></c:if>
-</textarea>                
+            		<span><spring:message code="edit.Remark.text"/>:</span>                    
+				<textarea cols="20" id="Description" name="Description" rows="2" style="width:95%; height:70px"><c:if test="${not empty event}"><c:out value="${event.description}"/></c:if></textarea>                
           </label>                
-          <input id="timezone" name="timezone" type="hidden" value="" />           
+          <input id="timezone" name="timezone" type="hidden" value="" />   
+          
+          <input id="locale" name="locale" type="hidden" value="${pageContext.response.locale } " />   
         </form>         
       </div>         
     </div>

@@ -3,7 +3,7 @@ var i18n = $.extend({}, i18n || {}, {
         dateformat: {
             "fulldaykey": "yyyyMMdd",
             "fulldayshow": "yyyy年M月d日",
-            "fulldayvalue": "yyyy-M-d",
+            "fulldayvalue": "yyyy-MM-d",
             "Md": "M/d (W)",
             "Md3": "M月d日",
             "separator": "-",
@@ -56,5 +56,18 @@ var i18n = $.extend({}, i18n || {}, {
         "day_plural": "天",
         "others": "另外",
         "item": "个"
+        
+        ,"loading_data_str":"数据加载中....."
+        ,"loading_data_processed_str":"请求处理中..."
+        ,"edit_win_caption":"日程编辑"
+        ,"new_win_caption":"创建日程"
+        ,"loadingpannel":"成功！"
+        ,"Ok":"确定"
+        ,"Cancel":"取消"
+        ,"ConfirmStr":"确定要删除当前日程事件吗？"
+        ,"Confirm":"确认"
+        ,"key":"v"
+        ,"key":"v"
+        ,"key":"v"
     }
 }); 
