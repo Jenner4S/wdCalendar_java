@@ -27,7 +27,7 @@ Open localhost:8080 in your browser.
 ![image](https://github.com/Jenner4S/wdCalendar_java/blob/master/docs/screenshot/wdCalendarProjectIndex-ZH-month%402x.png)
 ###英文周视图
 ![image](https://github.com/Jenner4S/wdCalendar_java/blob/master/docs/screenshot/wdCalendarProjectIndex-en-week%402x.png)
-###英文周视图
+###英文月视图
 ![image](https://github.com/Jenner4S/wdCalendar_java/blob/master/docs/screenshot/wdCalendarProjectIndex-en-month%402x.png)
 
 
