@@ -4,6 +4,8 @@ import com.abdobean.wdcalendar.dao.JqCalendarDAO;
 import com.abdobean.wdcalendar.model.Jqcalendar;
 import com.abdobean.wdcalendar.model.Lists;
 import com.abdobean.wdcalendar.model.Shop;
+import com.abdobean.wdcalendar.utils.DateTimeUtilities;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +33,7 @@ public class HomeController {
     @Autowired
     private HttpServletRequest context;
     @Autowired
-    utilities utilities;
+    DateTimeUtilities utilities;
 
     @RequestMapping(value = "/index")
     public ModelAndView home() {

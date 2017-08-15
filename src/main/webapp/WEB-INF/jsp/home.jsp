@@ -48,9 +48,10 @@
             var _MH = document.documentElement.clientHeight;
             var dvH = $dv.height() + 2;
             op.height = _MH - dvH;
-            op.eventItems =[];
-
+            //op.eventItems =[];
+            
             var p = $("#gridcontainer").bcalendar(op).BcalGetOp();
+            
             if (p && p.datestrshow) {
                 $("#txtdatetimeshow").text(p.datestrshow);
             }

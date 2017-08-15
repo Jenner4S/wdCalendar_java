@@ -2,15 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abdobean.wdcalendar.controller;
+package com.abdobean.wdcalendar.utils;
 
 import com.abdobean.wdcalendar.model.Jqcalendar;
 import com.abdobean.wdcalendar.model.jqcalendarSummary;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import org.joda.time.Chronology;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeZone;
+import org.joda.time.chrono.GJChronology;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.json.simple.JSONArray;
@@ -20,7 +24,7 @@ import org.json.simple.JSONObject;
  *
  * @author abdo.talaat
  */
-public class utilities {
+public class DateTimeUtilities {
 
     public  DateTime[] getWeekRange(String date) {
 
@@ -55,9 +59,14 @@ public class utilities {
 
     public  DateTime[] getDayRange(String date) {
 
+    		//DateTimeZone.setDefault(DateTimeZone.forID("Asia/Shanghai"));
+    		DateTimeZone zone = DateTimeZone.forID("Asia/Shanghai");
+    		Chronology gregorianJuian = GJChronology.getInstance(zone);
+    		System.out.println("now: " + DateTime.now());
         DateTime[] dateTimes = new DateTime[2];
         DateTimeFormatter formatter = DateTimeFormat.forPattern("YYYY-MM-DD");
-        DateTime dt = formatter.parseDateTime(date);
+        System.out.println(formatter.getZone());
+        DateTime dt = formatter.withChronology(gregorianJuian).parseDateTime(date);
         DateTime start = dt.withTimeAtStartOfDay();
         DateTime end = start.plusDays(1);
         dateTimes[0] = start;
