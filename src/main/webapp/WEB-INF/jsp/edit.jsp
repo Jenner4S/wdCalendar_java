@@ -13,7 +13,9 @@
     <link href="resources/css/dropdown.css" rel="stylesheet" />    
     <link href="resources/css/colorselect.css" rel="stylesheet" />   
        
-    <script src="resources/src/jquery.js" type="text/javascript"></script>    
+    <!-- <script src="resources/src/jquery.js" type="text/javascript"></script>    --> 
+    <script src="resources/js/jquery-2.1.4.min.js" type="text/javascript"></script>  
+    <script src="resources/js/jquery-migrate-1.2.1.js"></script>
     <script src="resources/src/Plugins/Common.js" type="text/javascript"></script>        
     <script src="resources/src/Plugins/jquery.form.js" type="text/javascript"></script>     
     <script src="resources/src/Plugins/jquery.validate.js" type="text/javascript"></script>     

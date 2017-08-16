@@ -12,7 +12,9 @@
     <link href="resources/css/dp.css" rel="stylesheet" type="text/css" />   
     <link href="resources/css/alert.css" rel="stylesheet" type="text/css" /> 
     <link href="resources/css/main.css" rel="stylesheet" type="text/css" /> 
-    <script src="resources/src/jquery.js" type="text/javascript"></script>  
+    <!-- <script src="resources/src/jquery.js" type="text/javascript"></script>   -->
+    <script src="resources/js/jquery-2.1.4.min.js" type="text/javascript"></script>  
+    <script src="resources/js/jquery-migrate-1.2.1.js"></script>
     
     <script src="resources/src/Plugins/Common.js" type="text/javascript"></script>  
     <script src="resources/src/Plugins/datepicker_lang_ZH.js" type="text/javascript"></script> 
@@ -65,7 +67,7 @@
 
 				<div id="showdaybtn" class="fbutton">
 					<div>
-						<span title='<spring:message code="home.showtoday.title" />' class="showdayview"><spring:message code="home.showtoday.text" /></span>
+						<span title='<spring:message code="home.showdayview.title" />' class="showdayview"><spring:message code="home.showdayview.text" /></span>
 					</div>
 				</div>
 				<div id="showweekbtn" class="fbutton fcurrent">
