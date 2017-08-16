@@ -42,7 +42,7 @@
 				<div class="ftitle">
 					<spring:message code="home.title" />
 					<span style="float: right;">
-						Language: <a href="?lang=zh_CN"><spring:message code="language.cn" /></a> - <a href="?lang=en_US"><spring:message code="language.en" /></a>
+						<a href="?lang=zh_CN"><spring:message code="language.cn" /></a> - <a href="?lang=en_US"><spring:message code="language.en" /></a>
 						| <a href="https://github.com/Jenner4S/wdCalendar_java" target="_blank">Github</a>
 					</span>
 				</div>

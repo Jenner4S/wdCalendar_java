@@ -42,7 +42,7 @@ var i18n = $.extend({}, i18n || {}, {
         "participant": "参与人",
         "get_data_exception": "获取数据发生异常",
         "new_event": "新日程",
-        "confirm_delete_event": "確定刪除该日程吗？",
+        "confirm_delete_event": "确定刪除该日程吗？",
         "confrim_delete_event_or_all": "刪除此序列还是单个事件？\r\n点击[确定]刪除事件,点击[取消]刪除序列",
         "data_format_error": "数据格式错误！",
         "invalid_title": "日程标题不能为空且不能包含符号($<>)",
@@ -54,8 +54,8 @@ var i18n = $.extend({}, i18n || {}, {
         "click_to_detail": "点击查看详细",
         "i_delete": "刪除",
         "day_plural": "天",
-        "others": "另外",
-        "item": "个"
+        "others": "还有",
+        "item": "项..."
         
         ,"loading_data_str":"数据加载中....."
         ,"loading_data_processed_str":"请求处理中..."

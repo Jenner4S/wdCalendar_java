@@ -1638,9 +1638,14 @@
             var width = (me.width() + 2) * 1.5;
             var top = offsetP.top + 15;
             var left = offsetMe.left;
-
+			debugger
             var daystr = this.abbr;
             var arrdays = daystr.split('/');
+            if(daystr.indexOf('/') > 0){
+            		arrdays = daystr.split('/');
+            }else if(daystr.indexOf('-') > 0){
+            		arrdays = daystr.split('-');
+            }
             var day = new Date(arrdays[0], parseInt(arrdays[1] - 1), arrdays[2]);
             var cc = $("#cal-month-cc");
             var ccontent = $("#cal-month-cc-content table tbody");

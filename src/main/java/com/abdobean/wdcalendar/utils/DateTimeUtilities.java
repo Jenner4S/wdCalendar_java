@@ -77,20 +77,18 @@ public class DateTimeUtilities {
     }
 
     public  DateTime getdateDateTime(String date) {
-    		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
-        final DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
         if(LocaleContextHolder.getLocale().getLanguage().equals("en")) {
-			formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm");
+        		dtf = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm");
 		}
         DateTime dt = dtf.parseDateTime(date);
         return dt;
     }
     
     public  String convertDateTimeToString(DateTime date) {
-    		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
-        final DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
         if(LocaleContextHolder.getLocale().getLanguage().equals("en")) {
-			formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm");
+        		dtf = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm");
 		}
         String dt = date.toString(dtf);
         return dt;
@@ -98,10 +96,9 @@ public class DateTimeUtilities {
     
     //m/d/Y H:i
     public  String convertDateTimeToJS(DateTime date) {
-    		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
-        final DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
         if(LocaleContextHolder.getLocale().getLanguage().equals("en")) {
-			formatter = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm");
+        		dtf = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm");
 		}
         String dt = date.toString(dtf);
         return dt;
@@ -124,6 +121,14 @@ public class DateTimeUtilities {
     }
     
     
+    /**
+     *  [主键,标题,开始时间,结束时间，是否全天日程，是否跨天日程,是否循环日程,颜色主题,是否有权限,地点,参与人] 
+     *  对应的数据类型 [String,String,Date,Date,1/0,1/0,1/0,0-21,0/1,String,String]
+     * @param jqcalendars
+     * @param start
+     * @param end
+     * @return
+     */
     public JSONObject createJqCalendarListJson(List<Jqcalendar> jqcalendars,DateTime start,DateTime end)
     {
         JSONArray jSONArray = new JSONArray();
